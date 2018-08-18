@@ -28,7 +28,6 @@
   <script src="/__/firebase/init.js"></script>
 
   <script type="text/javascript">
-
     function toggleSignIn() {
       if (firebase.auth().currentUser) {
         // [START signout]
@@ -59,7 +58,6 @@
       }
       document.getElementById('quickstart-sign-in').disabled = true;
     }
-
     function handleSignUp() {
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
@@ -82,13 +80,11 @@
         console.log(error);
       });
     }
-
     function sendEmailVerification() {
       firebase.auth().currentUser.sendEmailVerification().then(function() {
         alert('Email Verification Sent!');
       });
     }
-
     function sendPasswordReset() {
       var email = document.getElementById('email').value;
       firebase.auth().sendPasswordResetEmail(email).then(function() {
@@ -107,18 +103,28 @@
     function initApp() {
       firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById('quickstart-verify-email').disabled = true;
-
 		
-		if(user.email = coneve1414@gmail.com) {
+		if(user) {
 			setTimeout(redirectadmin, 5000)
 		}
-	  	function redirectadmin() {
+		
+		function redirectadmin() {
 			window.location = "https://console.firebase.google.com/u/0/project/scdb-login-main/overview";
 		}
-	      	
-
         if (user) {
-          
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+          document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+          document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+          if (!emailVerified) {
+            document.getElementById('quickstart-verify-email').disabled = false;
+          }
         } else {
           // User is signed out.
           // [START_EXCLUDE]
@@ -132,13 +138,11 @@
         // [END_EXCLUDE]
       });
       // [END authstatelistener]
-
       document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
       document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
       document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
       document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
     }
-
     window.onload = function() {
       initApp();
     };
