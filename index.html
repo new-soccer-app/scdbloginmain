@@ -12,14 +12,13 @@
 
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script>
-  // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDfsTFpvmgM6TXbALidmzloERP5On5q58w",
-    authDomain: "scdb-staff-login.firebaseapp.com",
-    databaseURL: "https://scdb-staff-login.firebaseio.com",
-    projectId: "scdb-staff-login",
-    storageBucket: "",
-    messagingSenderId: "869699499168"
+    apiKey: "AIzaSyBLwOZTUr-UL2UWpBH_8kERmLYWRa29hNA",
+    authDomain: "app1-5a55d.firebaseapp.com",
+    databaseURL: "https://app1-5a55d.firebaseio.com",
+    projectId: "app1-5a55d",
+    storageBucket: "app1-5a55d.appspot.com",
+    messagingSenderId: "129513787014"
   };
   firebase.initializeApp(config);
 </script>
@@ -103,14 +102,7 @@
     function initApp() {
       firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById('quickstart-verify-email').disabled = true;
-		
-		if(user) {
-			setTimeout(redirectadmin, 5000)
-		}
-		
-		function redirectadmin() {
-			window.location = "https://console.firebase.google.com/u/0/project/scdb-login-main/overview";
-		}
+	      
         if (user) {
           var displayName = user.displayName;
           var email = user.email;
